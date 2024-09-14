@@ -1,0 +1,35 @@
+version: '3'
+services:
+  mariadb:
+    image: mariadb:latest
+    container_name: mariadb_container
+    environment:
+      - MYSQL_ROOT_PASSWORD=root_password
+      - MYSQL_DATABASE=nombre_base_datos
+      - MYSQL_USER=usuario
+      - MYSQL_PASSWORD=password_usuario
+    ports:
+      - "3306:3306" # Exponer el puerto 3306 para MariaDB
+    volumes:
+      - ./data:/var/lib/mysql # Persistencia de datos de MariaDB
+    networks:
+      - my_network
+    restart: always
+
+  phpmyadmin:
+    image: phpmyadmin:latest
+    container_name: phpmyadmin_container
+    environment:
+      - PMA_HOST=mariadb # Nombre del servicio MariaDB
+      - MYSQL_ROOT_PASSWORD=root_password
+    ports:
+      - "8080:80" # Exponer phpMyAdmin en el puerto 8080
+    depends_on:
+      - mariadb
+    networks:
+      - my_network
+    restart: always
+
+networks:
+  my_network:
+    driver: bridge

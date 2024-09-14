@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <!-- https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP -->
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'self'; script-src 'self'"
+    />
+    <meta
+      http-equiv="X-Content-Security-Policy"
+      content="default-src 'self'; script-src 'self'"
+    />
+    <title>Electron & MySQL</title>
+    <link rel="stylesheet" href="./bootstrap.min.css">
+  </head>
+  <body>
+    <main class="container-fluid">
+      <div class="row">
+        <div class="col-md-6 p-4 my-auto">
+          <form class="card card-body">
+            <div class="form-group">
+              <input 
+                  type="text"
+                  id="name"
+                  placeholder="Products's Name"
+                  class="form-control" autofocus>
+            </div>
+            <div class="form-group mt-3">
+              <input 
+                  type="number"
+                  id="price"
+                  step="any"
+                  placeholder="Product's Price"
+                  class="form-control">
+            </div>
+            <div class="form-group mt-3">
+              <textarea
+                    id="description"
+                    rows="3"
+                    placeholder="Product's description" 
+                    class="form-control"></textarea>
+            </div>
+            <button class="btn btn-primary mt-3">
+              Save
+            </button>
+          </form>
+        </div>
+      </div>
+    </main>
+  </body>
+</html>
