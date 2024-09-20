@@ -21,6 +21,7 @@ lib-cov
 
 # My own dir that contains the coverage data from MariaDB
 data/ 
+.DS_Store
 
 # Coverage directory used by tools like istanbul
 coverage
