@@ -1,28 +1,17 @@
 <!DOCTYPE html>
-<html>
-
+<html lang="es">
 <head>
-  <meta charset="UTF-8" />
-  <!-- https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP -->
-  <!-- <meta
-      http-equiv="Content-Security-Policy"
-      content="default-src 'self'; script-src 'self'"
-    /> -->
-  <!-- <meta
-      http-equiv="X-Content-Security-Policy"
-      content="default-src 'self'; script-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com;"
-    /> -->
+  <meta charset="UTF-8">
   <meta http-equiv="Content-Security-Policy" content="default-src 'self'; 
-              script-src 'self' https://kit.fontawesome.com 'unsafe-inline';
-              style-src 'self' https://fonts.googleapis.com https://cdnjs.cloudflare.com https://ka-f.fontawesome.com https://fonts.googleapis.com 'unsafe-inline';
-              font-src 'self' https://fonts.gstatic.com https://ka-f.fontawesome.com https://cdnjs.cloudflare.com https://kit.fontawesome.com;
-              connect-src 'self' https://ka-f.fontawesome.com;
-              ">
 
-  <link rel="stylesheet" href="./bootstrap.min.css">
-  <!-- CDN de Animate -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
-  <link rel="stylesheet" href="./app.css">
+                script-src 'self' https://kit.fontawesome.com 'unsafe-inline';
+                style-src 'self' https://fonts.googleapis.com https://cdnjs.cloudflare.com https://ka-f.fontawesome.com https://fonts.googleapis.com 'unsafe-inline';
+                font-src 'self' https://fonts.gstatic.com https://ka-f.fontawesome.com https://cdnjs.cloudflare.com https://kit.fontawesome.com;
+                connect-src 'self' https://ka-f.fontawesome.com;">
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+  <link rel="stylesheet" href="./assets/app.css">
+  <link rel="stylesheet" href="./assets/bootstrap.min.css">
 
   <!-- FontAwesome Script -->
   <script src="https://kit.fontawesome.com/59817bf0a8.js" crossorigin="anonymous"></script>
@@ -32,78 +21,55 @@
 <body>
   <div class="container-fluid">
     <div class="row">
-
       <!-- Sidebar -->
       <nav id="sidebar" class="col-md-3 col-lg-2 d-md-block bg-light sidebar">
         <div class="position-sticky">
           <ul class="nav flex-column">
             <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="#">
+              <a class="nav-link active" aria-current="page" href="#" onclick="loadSection('dashboard')">
                 <i class="fa-solid fa-house"></i> Dashboard
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">
+              <a class="nav-link" href="#" onclick="loadSection('productos')">
                 <i class="fas fa-box"></i> Productos
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link active" href="#">
+              <a class="nav-link" href="#" onclick="loadSection('facturacion')">
                 <i class="fas fa-receipt"></i> Facturación
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">
+              <a class="nav-link" href="#" onclick="loadSection('clientes')">
                 <i class="fas fa-users"></i> Clientes
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">
+              <a class="nav-link" href="#" onclick="loadSection('reportes')">
                 <i class="fas fa-chart-bar"></i> Reportes
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">
+              <a class="nav-link" href="#" onclick="loadSection('configuracion')">
                 <i class="fas fa-cog"></i> Configuración
               </a>
             </li>
           </ul>
         </div>
       </nav>
+
       <!-- Main Content -->
       <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
-        <div
-          class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-          <h1 class="h2">Dashboard</h1>
-        </div>
-
-        <!-- Your existing content here -->
-        <div class="row">
-          <div class="col-md-6 p-4 my-auto">
-            <form class="card card-body" id="productForm">
-              <div class="form-group">
-                <input type="text" id="name" placeholder="Products's Name" class="form-control" autofocus>
-              </div>
-              <div class="form-group mt-3">
-                <input type="number" id="price" step="any" placeholder="Product's Price" class="form-control">
-              </div>
-              <div class="form-group mt-3">
-                <textarea id="description" rows="3" placeholder="Product's description" class="form-control" style="resize: none;"></textarea>
-              </div>
-              <button class="btn btn-primary mt-3">
-                Save
-              </button>
-            </form>
-          </div>
-          <div class="col-md-6">
-            <div id="products"></div>
-          </div>
+        <div id="content">
+          <!-- Aquí se cargará el contenido de las vistas -->
+          <h1>Bienvenido a Facturación Electrónica</h1>
         </div>
       </main>
     </div>
   </div>
 
-  <script src="app.js"></script>
+  <script src="./assets/app.js"></script>
+  <script src="./app.js"></script>
 </body>
-
 </html>

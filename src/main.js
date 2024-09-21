@@ -13,6 +13,7 @@ function createWindow() {
       enableRemoteModule: true
     }
   })
+  window.maximize();
   window.loadFile('src/ui/index.html');
 }
 
