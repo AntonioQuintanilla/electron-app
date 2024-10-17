@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <script defer src="../app.js"></script>
+</head>
+
+<body>
+
+<div class="container mt-5">
+    <div class="row">
+        <!-- Formulario de Identificación -->
+        <div class="col-md-6">
+            <h2>Identificación</h2>
+            <form id="identificacionForm">
+                <div class="form-group">
+                    <label for="version">Versión</label>
+                    <select id="version" class="form-control" required>
+                        <option value="">Seleccione la versión</option>
+                        <option value="1">1 - Versión 1</option>
+                    </select>
+                </div>
+                <div class="form-group mt-2">
+                    <label for="ambiente">Ambiente</label>
+                    <select id="ambiente" class="form-control" required>
+                        <option value="">Seleccione el ambiente</option>
+                        <option value="01">01 - Modo prueba</option>
+                        <option value="02">02 - Modo producción</option>
+                    </select>
+                </div>
+                <div class="form-group mt-2">
+                    <label for="tipoDte">Tipo DTE</label>
+                    <select id="tipoDte" class="form-control" required>
+                        <option value="">Seleccione el tipo de DTE</option>
+                        <option value="01">01 - Factura</option>
+                        <option value="03">03 - Comprobante de crédito fiscal</option>
+                        <option value="04">04 - Nota de remisión</option>
+                        <option value="05">05 - Nota de crédito</option>
+                        <option value="06">06 - Nota de débito</option>
+                        <option value="07">07 - Comprobante de retención</option>
+                        <option value="08">08 - Comprobante de liquidación</option>
+                        <option value="09">09 - Documento contable de liquidación</option>
+                        <option value="11">11 - Facturas de exportación</option>
+                        <option value="14">14 - Factura de sujeto excluido</option>
+                        <option value="15">15 - Comprobante de donación</option>
+                    </select>
+                </div>
+
+                <div class="form-group mt-2">
+                    <label for="numeroControl">Número de Control</label>
+                    <input type="text" id="numeroControl" placeholder="Número de Control" class="form-control" required
+                           maxlength="50">
+                </div>
+                <div class="form-group mt-2">
+                    <label for="codigoGeneracion">Código de Generación</label>
+                    <input type="text" id="codigoGeneracion" placeholder="Código de Generación" class="form-control"
+                           readonly>
+                </div>
+                <button type="button" id="generarUUID" class="btn btn-outline-primary">Crear codigo de generacion
+                </button>
+                <div class="form-group mt-2">
+                    <label for="tipoModelo">Tipo de Modelo</label>
+                    <select id="tipoModelo" class="form-control" required>
+                        <option value="">Seleccione el tipo de Modelo</option>
+                        <option value="1">1 - Modelo Facturación previo</option>
+                        <option value="2">2 - Modelo Facturación diferido</option>
+                    </select>
+                </div>
+                <div class="form-group mt-2">
+                    <label for="tipoOperacion">Tipo de Operación</label>
+                    <select id="tipoOperacion" class="form-control" required>
+                        <option value="">Seleccione el tipo de transmición</option>
+                        <option value="1">1 - Transmición normal</option>
+                        <option value="2">2 - Transmición por contingenicia</option>
+                    </select>
+                </div>
+                <div class="form-group mt-2">
+                    <label for="tipoContingencia">Tipo de Contingencia</label>
+                    <select id="tipoContingencia" class="form-control" required>
+                        <option value="">Seleccione el tipo de contingencia</option>
+                        <option value="1">1 - No disponibilidad de sistema del MH</option>
+                        <option value="2">2 - No disponibilidad de sistema del emisor</option>
+                        <option value="3">3 - Falla en el suministro de servicio de Internet del Emisor</option>
+                        <option value="4">4 - Falla en el suministro de energía eléctrica del emisor que impida la
+                            transmición de los DTE
+                        </option>
+                        <option value="5">5 - Otro</option>
+                    </select>
+                </div>
+                <div class="form-group mt-2">
+                    <label for="motivoContin">Motivo de Contingencia</label>
+                    <input type="text" id="motivoContin" placeholder="Motivo de Contingencia (Opcional)"
+                           class="form-control" maxlength="255">
+                </div>
+                <div class="form-group mt-2">
+                    <label for="fecEmi">Fecha de Emisión</label>
+                    <input type="date" id="fecEmi" class="form-control" required>
+                </div>
+                <div class="form-group mt-2">
+                    <label for="horEmi">Hora de Emisión</label>
+                    <input type="time" id="horEmi" class="form-control" required step="1">
+                </div>
+                <div class="form-group mt-2">
+                    <label for="tipoMoneda">Tipo de Moneda</label>
+                    <select id="tipoMoneda" class="form-control" required>
+                        <option value="">Seleccione el tipo de moneda</option>
+                        <option value="1">USD - Dólares</option>
+                    </select>
+                </div>
+            </form>
+        </div>
+
+
+        <!-- Formulario de Emisor -->
+        <div class="col-md-6">
+            <h2>Emisor</h2>
+            <form id="emisorForm">
+                <div class="form-group">
+                    <label for="nitEmisor">NIT</label>
+                    <input type="text" id="nitEmisor" placeholder="NIT" class="form-control" required maxlength="14">
+                </div>
+                <div class="form-group mt-2">
+                    <label for="nrcEmisor">NRC</label>
+                    <input type="text" id="nrcEmisor" placeholder="NRC" class="form-control" required maxlength="8">
+                </div>
+                <div class="form-group mt-2">
+                    <label for="nombreEmisor">Nombre</label>
+                    <input type="text" id="nombreEmisor" placeholder="Nombre" class="form-control" required
+                           maxlength="255">
+                </div>
+                <div class="form-group mt-2">
+                    <label for="codActividadEmisor">Código de Actividad</label>
+                    <input type="text" id="codActividadEmisor" placeholder="Código de Actividad" class="form-control"
+                           required
+                           maxlength="5">
+                </div>
+                <div class="form-group mt-2">
+                    <label for="descActividad">Descripción de la Actividad</label>
+                    <input type="text" id="descActividad" placeholder="Descripción de la Actividad" class="form-control"
+                           required maxlength="255">
+                </div>
+                <div class="form-group mt-2">
+                    <label for="nombreComercialEmisor">Nombre Comercial</label>
+                    <input type="text" id="nombreComercialEmisor" placeholder="Nombre Comercial (Opcional)"
+                           class="form-control">
+                </div>
+                <div class="form-group mt-2">
+                    <label for="tipoEstablecimiento">Tipo de Establecimiento</label>
+                    <input type="text" id="tipoEstablecimiento" placeholder="Tipo de Establecimiento"
+                           class="form-control" required maxlength="2">
+                </div>
+                <div class="form-group mt-2">
+                    <label for="direccionDepartamentoEmisor">Departamento</label>
+                    <select id="direccionDepartamentoEmisor" class="form-control" required>
+                        <option value=""> -- Seleccione el departamento --</option>
+                        <option value="00">00 - Otro (Para extranjeros)</option>
+                        <option value="01">01 - Ahuachapán</option>
+                        <option value="02">02 - Santa Ana</option>
+                        <option value="03">03 - Sonsonate</option>
+                        <option value="04">04 - Chalatenango</option>
+                        <option value="05">05 - La Libertad</option>
+                        <option value="06">06 - San Salvador</option>
+                        <option value="07">07 - Cuscatlán</option>
+                        <option value="08">08 - La Paz</option>
+                        <option value="09">09 - Cabañas</option>
+                        <option value="10">10 - San Vicente</option>
+                        <option value="11">11 - Usulután</option>
+                        <option value="12">12 - San Miguel</option>
+                        <option value="13">13 - Morazán</option>
+                        <option value="14">14 - La Unión</option>
+                    </select>
+
+                </div>
+                <div class="form-group mt-2">
+                    <label for="direccionMunicipioEmisor">Municipio</label>
+                    <input type="text" id="direccionMunicipioEmisor" placeholder="Municipio" class="form-control"
+                           required
+                           maxlength="2">
+                </div>
+                <div class="form-group mt-2">
+                    <label for="direccionComplementoEmisor">Complemento de Dirección</label>
+                    <input type="text" id="direccionComplementoEmisor" placeholder="Complemento de Dirección"
+                           class="form-control" required maxlength="255">
+                </div>
+                <div class="form-group mt-2">
+                    <label for="telefonoEmisor">Teléfono</label>
+                    <input type="text" id="telefonoEmisor" placeholder="Teléfono" class="form-control" required
+                           maxlength="9">
+                </div>
+                <div class="form-group mt-2">
+                    <label for="correoEmisor">Correo Electrónico</label>
+                    <input type="email" id="correoEmisor" placeholder="Correo Electrónico" class="form-control"
+                           required>
+                </div>
+                <div class="form-group mt-2">
+                    <label for="codEstableMH">Código de Establecimiento MH</label>
+                    <input type="text" id="codEstableMH" placeholder="Código de Establecimiento MH" class="form-control"
+                           required maxlength="10">
+                </div>
+                <div class="form-group mt-2">
+                    <label for="codPuntoVentaMH">Código de Punto de Venta MH</label>
+                    <input type="text" id="codPuntoVentaMH" placeholder="Código de Punto de Venta MH (Opcional)"
+                           class="form-control">
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!--    -->
+
+    <div class="row">
+
+
+        <div class="col-md-6">
+            <h2>Receptor</h2>
+            <form id="receptorForm">
+                <div class="form-group mt-2">
+                    <label for="tipoDocumento">Tipo de Documento</label>
+                    <select id="tipoDocumento" class="form-control" required>
+                        <option value="">Seleccione el tipo de documento</option>
+                        <option value="36">36 - NIT</option>
+                        <option value="13">13 - DUI</option>
+                        <option value="37">37 - Otro</option>
+                        <option value="03">03 - Pasaporte</option>
+                        <option value="02">02 - Carnet de Residente</option>
+                    </select>
+                </div>
+
+                <div class="form-group mt-2">
+                    <label for="numDocumento">Número de Documento</label>
+                    <input type="text" id="numDocumento" placeholder="Número de documento" class="form-control"
+                    >
+                </div>
+
+                <div class="form-group mt-2">
+                    <label for="nrcReceptor">NRC (opcional)</label>
+                    <input type="text" id="nrcReceptor" placeholder="NRC (opcional)" class="form-control" maxlength="8">
+                </div>
+
+                <div class="form-group mt-2">
+                    <label for="nombreReceptor">Nombre</label>
+                    <input type="text" id="nombreReceptor" placeholder="Nombre completo" class="form-control" required>
+                </div>
+
+                <div class="form-group mt-2">
+                    <label for="codActividadReceptor">Código de Actividad</label>
+                    <input type="text" id="codActividadReceptor" placeholder="Código de actividad" class="form-control"
+                           maxlength="5"
+                           required>
+                </div>
+
+                <div class="form-group mt-2">
+                    <label for="descActividadReceptor">Descripción de Actividad</label>
+                    <input type="text" id="descActividadReceptor" placeholder="Descripción de actividad"
+                           class="form-control"
+                           required>
+                </div>
+
+                <div class="form-group mt-2">
+                    <label for="direccionDepartamentoReceptor">Departamento</label>
+                    <input type="text" id="direccionDepartamentoReceptor" placeholder="Código de departamento"
+                           class="form-control"
+                           maxlength="2" required>
+                </div>
+
+                <div class="form-group mt-2">
+                    <label for="direccionMunicipioReceptor">Municipio</label>
+                    <input type="text" id="direccionMunicipioReceptor" placeholder="Código de municipio"
+                           class="form-control"
+                           maxlength="2"
+                           required>
+                </div>
+
+                <div class="form-group mt-2">
+                    <label for="direccionComplementoReceptor">Dirección</label>
+                    <input type="text" id="direccionComplementoReceptor" placeholder="Complemento de la dirección"
+                           class="form-control"
+                           required>
+                </div>
+
+                <div class="form-group mt-2">
+                    <label for="telefonoReceptor">Teléfono</label>
+                    <input type="text" id="telefonoReceptor" placeholder="Teléfono" class="form-control" maxlength="9"
+                           required>
+                </div>
+
+                <div class="form-group mt-2">
+                    <label for="correoReceptor">Correo electrónico</label>
+                    <input type="email" id="correoReceptor" placeholder="Correo electrónico" class="form-control"
+                           required>
+                </div>
+            </form>
+        </div>
+
+        <div class="col-md-6">
+            <h2>Cuerpo del documento</h2>
+            <form id="detalleForm">
+                <div class="form-group">
+                    <label for="numItem">Número de Ítem</label>
+                    <input type="number" id="numItem" placeholder="Número de Ítem" class="form-control" required>
+
+                    <div class="form-group mt-2">
+                        <label for="tipoItem">Tipo de Ítem</label>
+                        <input type="number" id="tipoItem" placeholder="Tipo de Ítem" class="form-control" required>
+                    </div>
+
+                    <div class="form-group mt-2">
+                        <label for="numeroDocumento">Número de Documento (opcional)</label>
+                        <input type="text" id="numeroDocumento" placeholder="Número de Documento" class="form-control">
+                    </div>
+
+                    <div class="form-group mt-2">
+                        <label for="cantidad">Cantidad</label>
+                        <input type="number" step="0.00000001" id="cantidad" placeholder="Cantidad" class="form-control"
+                               required>
+                    </div>
+
+                    <div class="form-group mt-2">
+                        <label for="codigo">Código</label>
+                        <input type="text" id="codigo" placeholder="Código del Ítem" class="form-control" maxlength="20"
+                               required>
+                    </div>
+
+                    <div class="form-group mt-2">
+                        <label for="descripcion">Descripción</label>
+                        <input type="text" id="descripcion" placeholder="Descripción del Ítem" class="form-control"
+                               maxlength="255" required>
+                    </div>
+
+                    <div class="form-group mt-2">
+                        <label for="precioUni">Precio Unitario</label>
+                        <input type="number" step="0.01" id="precioUni" placeholder="Precio Unitario"
+                               class="form-control"
+                               required>
+                    </div>
+
+                    <div class="form-group mt-2">
+                        <label for="montoDescu">Monto de Descuento</label>
+                        <input type="number" step="0.01" id="montoDescu" placeholder="Monto de Descuento"
+                               class="form-control"
+                               required>
+                    </div>
+
+                    <div class="form-group mt-2">
+                        <label for="ventaNoSuj">Venta no Sujeta</label>
+                        <input type="number" step="0.01" id="ventaNoSuj" placeholder="Venta no Sujeta"
+                               class="form-control"
+                               required>
+                    </div>
+
+                    <div class="form-group mt-2">
+                        <label for="ventaExenta">Venta Exenta</label>
+                        <input type="number" step="0.01" id="ventaExenta" placeholder="Venta Exenta"
+                               class="form-control"
+                               required>
+                    </div>
+
+                    <div class="form-group mt-2">
+                        <label for="ventaGravada">Venta Gravada</label>
+                        <input type="number" step="0.01" id="ventaGravada" placeholder="Venta Gravada"
+                               class="form-control"
+                               required>
+                    </div>
+
+                    <div class="form-group mt-2">
+                        <label for="psv">PSV</label>
+                        <input type="number" step="0.01" id="psv" placeholder="PSV" class="form-control" required>
+                    </div>
+
+                    <div class="form-group mt-2">
+                        <label for="noGravado">No Gravado</label>
+                        <input type="number" step="0.01" id="noGravado" placeholder="No Gravado" class="form-control"
+                               required>
+                    </div>
+
+                    <div class="form-group mt-2">
+                        <label for="ivaItem">IVA del Ítem</label>
+                        <input type="number" step="0.01" id="ivaItem" placeholder="IVA del Ítem" class="form-control"
+                               required>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+    </div>
+
+    <!-- Botón único para enviar ambos formularios -->
+    <div class="text-center mt-4">
+        <button id="submitForm" class="btn btn-success">Crear Factura Electrónica</button>
+    </div>
+    <hr>
+</div>
+
+
+
+<script src="../../scripts/facturas.js"></script>
+<script defer src="./facturaForms/app.js"></script>
+<script>
+    console.log('HOla')
+</script>
+
+</body>
+</html>

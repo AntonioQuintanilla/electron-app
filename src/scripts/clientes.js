@@ -88,7 +88,7 @@ function loadClientsLogic() {
                 <td>${client.direccion}</td>
                 <td>${ formatDate(client.fecha_registro)}</td>
                 <td>
-                  <button class="btn btn-outline-danger delete-btn">Eliminar</button>  
+                  <button class="btn btn-outline-danger delete-btn">Eliminar</button>
                   <button class="btn btn-outline-primary update-btn">Editar</button>
                 </td>
         `;

@@ -13,4 +13,6 @@ contextBridge.exposeInMainWorld('api', {
     createClient: (client) => ipcRenderer.invoke('create-client', client),
     updateClient: (client) => ipcRenderer.invoke('update-client', client),
     deleteClient: (id) => ipcRenderer.invoke('delete-client', id),
+    // UUID
+    generateUUID: () => ipcRenderer.invoke('generate-uuid')
 })

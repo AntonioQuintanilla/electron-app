@@ -1,6 +1,7 @@
 const { ipcMain } = require('electron');
 const { createProduct, getProducts, deleteProduct, getProductById, updateProduct } = require('../controllers/productController');
 const { createClient, getClients, getClientById, updateClient, deleteClient } = require("../controllers/clientController");
+const { v4: uuidv4 } = require('uuid');
 
 // Inicializa los manejadores IPC
 function initializeIpcHandlers() {
@@ -45,6 +46,10 @@ function initializeIpcHandlers() {
 
     ipcMain.handle('delete-client', async (event, id) => {
         return await deleteClient(id);
+    });
+
+    ipcMain.handle('generate-uuid', async (event) => {
+        return uuidv4();
     });
 }
 

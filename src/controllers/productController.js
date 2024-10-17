@@ -2,19 +2,19 @@ const { getConnection } = require('../database');
 const { Notification } = require('electron');
 
 // Función para insertar un producto en la base de datos
-async function createProduct(product) {
+async function createProduct(producto) {
     try {
         const conn = await getConnection();
-        product.price = parseFloat(product.price);
-        const result = await conn.query('INSERT INTO product SET ?', product);
+        // producto.precio = parseFloat(producto.price);
+        const result = await conn.query('INSERT INTO productos SET ?', producto);
 
         new Notification({
             title: 'Sistema de Inventarios',
             body: 'Producto guardado exitosamente'
         }).show();
 
-        product.id = result.insertId;
-        return product;
+        producto.id = result.insertId;
+        return producto;
     } catch (error) {
         console.error('Error al guardar el producto:', error);
         throw error;
@@ -23,25 +23,25 @@ async function createProduct(product) {
 
 async function getProducts() {
     const conn = await getConnection();
-    const result = await conn.query('SELECT * FROM product');
+    const result = await conn.query('SELECT * FROM productos');
     return result;
 }
 
 async function deleteProduct(id) {
     const conn = await getConnection();
-    const result = await conn.query('DELETE FROM product WHERE id = ?', id);
+    const result = await conn.query('DELETE FROM productos WHERE id_producto = ?', id);
     return result;
 }
 
 async function getProductById(id) {
     const conn = await getConnection();
-    const result = await conn.query('SELECT * FROM product WHERE id = ?', id);
+    const result = await conn.query('SELECT * FROM productos WHERE id_producto = ?', id);
     return result[0];
 }
 
-async function updateProduct(product) {
+async function updateProduct(producto) {
     const conn = await getConnection();
-    const result = await conn.query('UPDATE product SET ? WHERE id = ?', [product, product.id]);
+    const result = await conn.query('UPDATE productos SET ? WHERE id_producto = ?', [producto, producto.id_producto]);
     return result;
 }
 
